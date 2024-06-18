@@ -31,7 +31,7 @@ public class TodoControllerTest {
     }
     @Test
     void shouldReturnAllTodos() throws Exception {
-        mockMvc.perform(get("/api/v1/todos"))
+        mockMvc.perform(get("/v1/todos"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", Matchers.hasSize(3)));
@@ -39,7 +39,7 @@ public class TodoControllerTest {
 
     @Test
     void shouldReturnTodoWhenValidId() throws Exception {
-        mockMvc.perform(get("/api/v1/todos/1"))
+        mockMvc.perform(get("/v1/todos/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("($.task").value(todo.getTask()));
     }
@@ -48,7 +48,7 @@ public class TodoControllerTest {
     @Test
     void shouldReturnTodoNotFoundExceptionWhenInvalidId() throws Exception {
 
-        mockMvc.perform(get("/api/v1/todos/99"))
+        mockMvc.perform(get("/v1/todos/99"))
                 .andExpect(status().isNotFound());
 
     }
@@ -56,7 +56,7 @@ public class TodoControllerTest {
     @Test
     void shouldReturnBadRequestWhenInvalidIdType() throws Exception {
 
-        mockMvc.perform(get("/api/v1/todos/hi"))
+        mockMvc.perform(get("/v1/todos/hi"))
                 .andExpect(status().isBadRequest());
 
     }
