@@ -29,6 +29,7 @@ public class TodoControllerTest {
                 .completed(false)
                 .build();
     }
+
     @Test
     void shouldReturnAllTodos() throws Exception {
         mockMvc.perform(get("/v1/todos"))
@@ -60,8 +61,6 @@ public class TodoControllerTest {
                 .andExpect(status().isBadRequest());
 
     }
-
-
 
 
 }

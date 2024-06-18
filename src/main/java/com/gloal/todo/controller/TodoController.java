@@ -15,10 +15,11 @@ public class TodoController {
 
     @Autowired
     TodoService todoService;
-        @GetMapping("/v1/todos")
-        public ResponseEntity<List<Todo>> fetchAllTodos(){
-            List<Todo> todoList = todoService.fetchAllTodos();
-            return ResponseEntity.ok(todoList);
-        }
+
+    @GetMapping("/v1/todos")
+    public ResponseEntity<List<Todo>> fetchAllTodos() {
+        List<Todo> todoList = todoService.fetchAllTodos();
+        return ResponseEntity.ok(todoList);
+    }
 
 }

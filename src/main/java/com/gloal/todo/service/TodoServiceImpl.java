@@ -3,13 +3,15 @@ package com.gloal.todo.service;
 import com.gloal.todo.error.TodoNotFoundException;
 import com.gloal.todo.model.Todo;
 import com.gloal.todo.repository.TodoRepository;
+import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class TodoServiceImpl implements TodoService{
+public class TodoServiceImpl implements TodoService {
 
     TodoRepository todoRepository;
 
@@ -22,7 +24,7 @@ public class TodoServiceImpl implements TodoService{
     public Todo fetchTodoById(Long todoId) throws TodoNotFoundException {
         Optional<Todo> todo = todoRepository.findById(todoId);
 
-        if(todo.isEmpty()){
+        if (todo.isEmpty()) {
             throw new TodoNotFoundException("Todo not found");
         }
         return todo.get();
@@ -37,13 +39,13 @@ public class TodoServiceImpl implements TodoService{
     public Todo updateTodoById(Todo updatedTodo, Long todoId) {
         Todo oldTodo = todoRepository.findById(todoId).get();
 
-        if(Objects.nonNull(updatedTodo.getTask()) &&
-                !updatedTodo.getTask().isEmpty()){
+        if (Objects.nonNull(updatedTodo.getTask()) &&
+                !updatedTodo.getTask().isEmpty()) {
             oldTodo.setTask(updatedTodo.getTask());
         }
 
-        if(Objects.nonNull(updatedTodo.getCompleted()) &&
-                !updatedTodo.getCompleted().equals(oldTodo.getCompleted())){
+        if (Objects.nonNull(updatedTodo.getCompleted()) &&
+                !updatedTodo.getCompleted().equals(oldTodo.getCompleted())) {
             oldTodo.setCompleted(updatedTodo.getCompleted());
         }
 

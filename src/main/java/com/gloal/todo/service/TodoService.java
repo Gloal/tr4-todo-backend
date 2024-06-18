@@ -12,9 +12,14 @@ public interface TodoService {
 
 
     List<Todo> fetchAllTodos();
+
     Todo fetchTodoById(Long todoId) throws TodoNotFoundException;
+
     Todo saveTodo(Todo newTodo);
+
     Todo updateTodoById(Todo todoToUpdate, Long todoId);
+
     void deleteTodoById(Long todoId);
+
     void deleteAllTodos();
 }
