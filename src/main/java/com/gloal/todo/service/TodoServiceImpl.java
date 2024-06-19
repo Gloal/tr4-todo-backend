@@ -1,23 +1,34 @@
 package com.gloal.todo.service;
 
+import com.gloal.todo.controller.TodoController;
 import com.gloal.todo.error.TodoNotFoundException;
 import com.gloal.todo.model.Todo;
 import com.gloal.todo.repository.TodoRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class TodoServiceImpl implements TodoService {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(TodoController.class);
+    @Autowired
     TodoRepository todoRepository;
 
     @Override
     public List<Todo> fetchAllTodos() {
-        return todoRepository.findAll();
+        try {
+            return todoRepository.findAll();
+        }catch (Exception e){
+           LOGGER.error("Error retrieving todo list", e);
+        }
+        return new ArrayList<>();
     }
 
     @Override
@@ -44,9 +55,9 @@ public class TodoServiceImpl implements TodoService {
             oldTodo.setTask(updatedTodo.getTask());
         }
 
-        if (Objects.nonNull(updatedTodo.getCompleted()) &&
-                !updatedTodo.getCompleted().equals(oldTodo.getCompleted())) {
-            oldTodo.setCompleted(updatedTodo.getCompleted());
+        if (Objects.nonNull(updatedTodo.getIsCompleted()) &&
+                !updatedTodo.getIsCompleted().equals(oldTodo.getIsCompleted())) {
+            oldTodo.setIsCompleted(updatedTodo.getIsCompleted());
         }
 
         return todoRepository.save(oldTodo);
@@ -62,4 +73,10 @@ public class TodoServiceImpl implements TodoService {
         todoRepository.deleteAll();
 
     }
+
+    public Long getNumberOfIncompleteTasks(){
+        return todoRepository.countByIsCompleted(true);
+    }
+
+
 }
