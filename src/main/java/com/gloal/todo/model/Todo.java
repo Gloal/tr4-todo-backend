@@ -17,5 +17,5 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long taskId;
     private String task;
-    private Boolean completed;
+    private Boolean isCompleted;
 }
