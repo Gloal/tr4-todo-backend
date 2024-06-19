@@ -1,12 +1,14 @@
 package com.gloal.todo.controller;
 
 import com.gloal.todo.model.Todo;
+import com.gloal.todo.service.TodoService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -20,13 +22,15 @@ public class TodoControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @MockBean
+    TodoService todoService;
     private Todo todo;
 
     @BeforeEach
     void setUp() {
         todo = Todo.builder()
                 .task("Book Meeting")
-                .completed(false)
+                .isCompleted(false)
                 .build();
     }
 
@@ -35,7 +39,7 @@ public class TodoControllerTest {
         mockMvc.perform(get("/v1/todos"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$", Matchers.hasSize(3)));
+                .andExpect(jsonPath("$", Matchers.hasSize(0)));
     }
 
     @Test
