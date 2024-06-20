@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: 8080
 
 spring:
   profiles:
@@ -12,14 +12,14 @@ spring:
     activate:
       on-profile: dev
   application:
-    name: demo
+    name: todo
   datasource:
-    username: postgres
+    username: ${db_user}
+    password: ${db_psswd}
     hikari:
       maximum-pool-size: '5'
-      connection-timeout: '20000'
+      connection-timeout: '2000'
     url: jdbc:postgresql://localhost:5432/postgres-dev
-    password: postgres
   jpa:
     properties:
       hibernate:
@@ -38,14 +38,14 @@ spring:
     activate:
       on-profile: qa
   application:
-    name: demo
+    name: todo
   datasource:
-    username: postgres
+    username: ${db_user}
+    password: ${db_psswd}
     hikari:
       maximum-pool-size: '5'
-      connection-timeout: '20000'
+      connection-timeout: '2000'
     url: jdbc:postgresql://localhost:5432/postgres-qa
-    password: postgres
   jpa:
     properties:
       hibernate:
@@ -64,14 +64,14 @@ spring:
     activate:
       on-profile: prod
   application:
-    name: demo
+    name: todo
   datasource:
-    username: postgres
+    username: ${db_user}
+    password: ${db_psswd}
     hikari:
       maximum-pool-size: '5'
-      connection-timeout: '20000'
+      connection-timeout: '2000'
     url: jdbc:postgresql://localhost:5432/postgres-prod
-    password: postgres
   jpa:
     properties:
       hibernate:
