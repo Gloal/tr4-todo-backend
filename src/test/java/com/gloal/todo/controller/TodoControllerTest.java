@@ -33,7 +33,6 @@ public class TodoControllerTest {
                 .isCompleted(false)
                 .build();
     }
-
     @Test
     void shouldReturnAllTodos() throws Exception {
         mockMvc.perform(get("/v1/todos"))

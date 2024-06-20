@@ -22,4 +22,6 @@ public interface TodoService {
     void deleteTodoById(Long todoId);
 
     void deleteAllTodos();
+
+    Long getNumberOfIncompleteTasks();
 }
