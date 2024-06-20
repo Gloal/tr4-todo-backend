@@ -39,7 +39,7 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public Todo saveTodo(Todo todo) {
         if (getNumberOfIncompleteTasks() >= 10) {
-            throw new IllegalArgumentException("You cannot have more than 10 incomplete tasks,, Complete a task then you can create new ones");
+            throw new IllegalArgumentException("You cannot have more than 10 incomplete tasks");
         }
         return todoRepository.save(todo);
     }
