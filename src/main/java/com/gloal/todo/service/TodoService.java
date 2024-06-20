@@ -2,9 +2,6 @@ package com.gloal.todo.service;
 
 import com.gloal.todo.error.TodoNotFoundException;
 import com.gloal.todo.model.Todo;
-import com.gloal.todo.repository.TodoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

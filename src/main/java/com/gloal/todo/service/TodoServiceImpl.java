@@ -33,15 +33,15 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public Todo fetchTodoById(Long todoId) {
-        return todoRepository.findById(todoId)
-                .orElseThrow(() -> new TodoNotFoundException("Todo with id: " + todoId + " not found"));
+        return todoRepository.findById(todoId).orElseThrow(() -> new TodoNotFoundException("Todo with id: " + todoId + " not found"));
     }
 
     @Override
     public Todo saveTodo(Todo todo) {
         if (getNumberOfIncompleteTasks() >= 10) {
             throw new IllegalArgumentException("You cannot have more than 10 incomplete tasks,, Complete a task then you can create new ones");
-        } return todoRepository.save(todo);
+        }
+        return todoRepository.save(todo);
     }
 
     @Override
@@ -73,8 +73,8 @@ public class TodoServiceImpl implements TodoService {
     }
 
     public Long getNumberOfIncompleteTasks() {
+
         return todoRepository.countByIsCompleted(false);
     }
-
 
 }
