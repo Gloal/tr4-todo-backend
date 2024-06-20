@@ -46,7 +46,14 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public Todo updateTodoById(Todo updatedTodo, Long todoId) {
-        Todo oldTodo = todoRepository.findById(todoId).orElseThrow(() -> new TodoNotFoundException("Todo with id: " + todoId + " not found"));
+        Todo oldTodo = todoRepository.findById(todoId)
+                .orElseThrow(() -> new TodoNotFoundException("Todo with id: " + todoId + " not found"));
+
+        if (Objects.nonNull(updatedTodo.getIsCompleted()) && !updatedTodo.getIsCompleted()) {
+            if (!oldTodo.getIsCompleted() && getNumberOfIncompleteTasks() >= 10) {
+                throw new IllegalArgumentException("You cannot have more than 10 incomplete tasks");
+            }
+        }
 
         if (Objects.nonNull(updatedTodo.getTask()) && !updatedTodo.getTask().isEmpty()) {
             oldTodo.setTask(updatedTodo.getTask());

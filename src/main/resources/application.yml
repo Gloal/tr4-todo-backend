@@ -68,7 +68,7 @@ spring:
   datasource:
     username: ${db_user}
     password: ${db_psswd}
-      hikari:
+    hikari:
       maximum-pool-size: '5'
       connection-timeout: '2000'
     url: jdbc:postgresql://localhost:5432/postgres-prod

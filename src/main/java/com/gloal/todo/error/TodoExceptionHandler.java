@@ -8,6 +8,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -40,6 +41,21 @@ public class TodoExceptionHandler {
         ApiErrorResponse apiErrorResponse = new ApiErrorResponse(
                 request.getRequestURI(),
                 errorMessage.toString(),
+                HttpStatus.BAD_REQUEST.value(),
+                LocalDateTime.now()
+        );
+
+        return new ResponseEntity<>(apiErrorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value={MethodArgumentTypeMismatchException.class})
+    public ResponseEntity<ApiErrorResponse> handleException(MethodArgumentTypeMismatchException  e, HttpServletRequest request) {
+        String errorMessage = "Failed to convert value of type '" + e.getValue().getClass().getName() +
+                "' to required type '" + e.getRequiredType().getName() + "'; " + e.getMessage();
+
+        ApiErrorResponse apiErrorResponse = new ApiErrorResponse(
+                request.getRequestURI(),
+                errorMessage,
                 HttpStatus.BAD_REQUEST.value(),
                 LocalDateTime.now()
         );

@@ -27,6 +27,5 @@ public class Todo {
     @NotBlank(message = "Task must be supplied")
     private String task;
 
-
     private Boolean isCompleted = false;
 }
