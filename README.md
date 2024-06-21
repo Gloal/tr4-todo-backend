@@ -67,8 +67,8 @@ This separation of layers promotes modularity, making the application easier to 
    
 #### Run with Docker
 
-3. Build using Docker
+1. Build using Docker
     Docker image: `docker pull gloal/todo`
-    
-    `$ docker run -d --hostname=my-container --env DB_NAME=postgres --env DB_PORT=5432 --env DB_PASSWORD=postgres --env DB_USER=postgres --env SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres --env SPRING_DATASOURCE_USERNAME=postgres --env SPRING_DATASOURCE_PASSWORD=postgres --network=bridge   --name=my-container --restart=no gloal/todo:latest
+2. Run docker command line
+    `$ docker run -d --hostname=<$enter_host-name> --env DB_NAME=<$enter_db_name> --env DB_PORT=<$enter_de-port> --env DB_PASSWORD=<$enter_db_password> --env DB_USER=<$enter_db_user> --env SPRING_DATASOURCE_URL=jdbc:postgresql://<$enter-host-name>:5432/postgres --env SPRING_DATASOURCE_USERNAME=<$enter_datasource_username> --env SPRING_DATASOURCE_PASSWORD=<$enter_datasource_password> --network=bridge   --name=my-container --restart=no gloal/todo:latest
   `
