@@ -21,7 +21,8 @@ The primary goal of this project was to build-on knowledge and practice concepts
 - **Read**: Retrieve todo items individually or all at once.
 - **Update**: Modify existing todo items.
 - **Delete**: Remove todo items based on their unique identifiers.
-  ![Swagger documentation(./Swagger-Endpoints.png)
+  
+![Swagger documentation(./Swagger-Endpoints.png)
 
 ## Installation
 
@@ -61,6 +62,5 @@ The primary goal of this project was to build-on knowledge and practice concepts
     Docker image: `docker pull gloal/todo`
     
     `$ docker run -d --hostname=my-container --env DB_NAME=postgres --env DB_PORT=5432 --env DB_PASSWORD=postgres --env DB_USER=postgres --env SPRING_DATASOURC
-    E_URL=jdbc:postgresql://db:5432/postgres --env SPRING_DATASOURCE_USERNAME=postgres --env SPRING_DATASOURCE_PASSWORD=postgres --network=bridge --name=my-container --restart=no gloal/todo:latest
-`
-``
+    E_URL=jdbc:postgresql://db:5432/postgres --env SPRING_DATASOURCE_USERNAME=postgres --env SPRING_DATASOURCE_PASSWORD=postgres --network=bridge   --name=my-container --restart=no gloal/todo:latest
+  `
