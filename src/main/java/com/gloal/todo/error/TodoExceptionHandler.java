@@ -16,8 +16,8 @@ import java.util.List;
 @ControllerAdvice
 public class TodoExceptionHandler {
 
-    @ExceptionHandler(value={TodoNotFoundException.class})
-    public ResponseEntity<ApiErrorResponse> handleException(TodoNotFoundException e, HttpServletRequest request){
+    @ExceptionHandler(value = {TodoNotFoundException.class})
+    public ResponseEntity<ApiErrorResponse> handleException(TodoNotFoundException e, HttpServletRequest request) {
         ApiErrorResponse apiErrorResponse = new ApiErrorResponse(
                 request.getRequestURI(),
                 e.getMessage(),
@@ -28,7 +28,7 @@ public class TodoExceptionHandler {
         return new ResponseEntity<>(apiErrorResponse, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(value={MethodArgumentNotValidException.class})
+    @ExceptionHandler(value = {MethodArgumentNotValidException.class})
     public ResponseEntity<ApiErrorResponse> handleException(MethodArgumentNotValidException e, HttpServletRequest request) {
         BindingResult result = e.getBindingResult();
         List<FieldError> fieldErrors = result.getFieldErrors();
@@ -48,8 +48,8 @@ public class TodoExceptionHandler {
         return new ResponseEntity<>(apiErrorResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(value={MethodArgumentTypeMismatchException.class})
-    public ResponseEntity<ApiErrorResponse> handleException(MethodArgumentTypeMismatchException  e, HttpServletRequest request) {
+    @ExceptionHandler(value = {MethodArgumentTypeMismatchException.class})
+    public ResponseEntity<ApiErrorResponse> handleException(MethodArgumentTypeMismatchException e, HttpServletRequest request) {
         String errorMessage = "Failed to convert value of type '" + e.getValue().getClass().getName() +
                 "' to required type '" + e.getRequiredType().getName() + "'; " + e.getMessage();
 
@@ -63,8 +63,8 @@ public class TodoExceptionHandler {
         return new ResponseEntity<>(apiErrorResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(value={Exception.class})
-    public ResponseEntity<ApiErrorResponse> handleException(Exception e, HttpServletRequest request){
+    @ExceptionHandler(value = {Exception.class})
+    public ResponseEntity<ApiErrorResponse> handleException(Exception e, HttpServletRequest request) {
         ApiErrorResponse apiErrorResponse = new ApiErrorResponse(
                 request.getRequestURI(),
                 e.getMessage(),

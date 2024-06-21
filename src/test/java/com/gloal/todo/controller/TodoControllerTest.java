@@ -26,7 +26,6 @@ public class TodoControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
     @MockBean
     TodoService todoService;
     private Todo todo;
@@ -38,6 +37,7 @@ public class TodoControllerTest {
                 .isCompleted(false)
                 .build();
     }
+
     @Test
     void shouldReturnAllTodos() throws Exception {
         when(todoService.fetchAllTodos()).thenReturn(List.of());
@@ -52,7 +52,7 @@ public class TodoControllerTest {
     void shouldReturnTodoWhenValidId() throws Exception {
         when(todoService.fetchTodoById(anyLong())).thenReturn(todo);
 
-        mockMvc.perform(get("/v1/todos/18"))
+        mockMvc.perform(get("/v1/todo/18"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.task").value(todo.getTask()));
@@ -62,13 +62,13 @@ public class TodoControllerTest {
     void shouldReturnTodoNotFoundExceptionWhenInvalidId() throws Exception {
         when(todoService.fetchTodoById(anyLong())).thenThrow(new TodoNotFoundException("Todo with id: 99 not found"));
 
-        mockMvc.perform(get("/v1/todos/99"))
+        mockMvc.perform(get("/v1/todo/99"))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     void shouldReturnBadRequestWhenInvalidIdType() throws Exception {
-        mockMvc.perform(get("/v1/todos/hi"))
+        mockMvc.perform(get("/v1/todo/hi"))
                 .andExpect(status().isBadRequest());
     }
 }

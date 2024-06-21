@@ -18,14 +18,11 @@ public class SwaggerConfig {
         Contact contact = new Contact();
         contact.setUrl("https://github.com/Gloal/");
 
-        Info appInfo = new Info()
-                .title("Todo Api")
-                .version("1.0")
-                .contact(contact)
+        Info appInfo = new Info().title("Todo Api")
+                .version("1.0").contact(contact)
                 .description("Todo App Api Documentation")
                 .termsOfService("FreeToUSe")
                 .license(mitLicense);
-
 
         return new OpenAPI().info(appInfo);
     }

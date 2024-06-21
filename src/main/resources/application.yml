@@ -2,24 +2,15 @@ server:
   port: 8080
 
 spring:
-  profiles:
-    active: qa
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: dev
   application:
     name: todo
   datasource:
-    username: ${db_user}
-    password: ${db_psswd}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
     hikari:
       maximum-pool-size: '5'
       connection-timeout: '2000'
-    url: jdbc:postgresql://localhost:5432/postgres-dev
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
   jpa:
     properties:
       hibernate:
@@ -28,56 +19,5 @@ spring:
           lob:
             non_contextual_creation: 'true'
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: 'true'
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: qa
-  application:
-    name: todo
-  datasource:
-    username: ${db_user}
-    password: ${db_psswd}
-    hikari:
-      maximum-pool-size: '5'
-      connection-timeout: '2000'
-    url: jdbc:postgresql://localhost:5432/postgres-qa
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        jdbc:
-          lob:
-            non_contextual_creation: 'true'
-    hibernate:
-      ddl-auto: update
-    show-sql: 'true'
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: prod
-  application:
-    name: todo
-  datasource:
-    username: ${db_user}
-    password: ${db_psswd}
-    hikari:
-      maximum-pool-size: '5'
-      connection-timeout: '2000'
-    url: jdbc:postgresql://localhost:5432/postgres-prod
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        jdbc:
-          lob:
-            non_contextual_creation: 'true'
-    hibernate:
-      ddl-auto: update
