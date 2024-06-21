@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @Validated
-@RequestMapping("/v1/todos")
+@RequestMapping("/v1")
 public class TodoController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TodoController.class);
@@ -24,42 +24,42 @@ public class TodoController {
     @Autowired
     TodoService todoService;
 
-    @GetMapping
+    @GetMapping("todos")
     public ResponseEntity<List<Todo>> fetchAllTodos() {
         LOGGER.info("Get request /v1/todos path");
         List<Todo> todoList = todoService.fetchAllTodos();
         return ResponseEntity.ok(todoList);
     }
 
-    @GetMapping("/{todoId}")
+    @GetMapping("/todo/{todoId}")
     public ResponseEntity<Todo> fetchTodoById(@PathVariable("todoId") @Min(1) Long todoId) {
         LOGGER.info("Get request /v1/todos/{} path", todoId);
         Todo todo = todoService.fetchTodoById(todoId);
         return ResponseEntity.ok(todo);
     }
 
-    @PostMapping
+    @PostMapping("/todo")
     public ResponseEntity<Todo> saveTodo(@Valid @RequestBody Todo todo) {
         LOGGER.info("Post request /v1/todos");
         Todo savedTodo = todoService.saveTodo(todo);
         return ResponseEntity.ok(savedTodo);
     }
 
-    @PutMapping("/{todoId}")
+    @PutMapping("/todo/{todoId}")
     public ResponseEntity<Todo> updateTodoById(@PathVariable("todoId") @Min(1) Long todoId, @Valid @RequestBody Todo updatedTodo) {
         LOGGER.info("Put request /v1/todos/{}", todoId);
         Todo todo = todoService.updateTodoById(updatedTodo, todoId);
         return ResponseEntity.ok(todo);
     }
 
-    @DeleteMapping("/{todoId}")
+    @DeleteMapping("/todo/{todoId}")
     public ResponseEntity<Void> deleteTodoById(@PathVariable("todoId") @Min(1) Long todoId) {
-        LOGGER.info("Delete request /v1/todos/{}", todoId);
+        LOGGER.info("Delete request /v1/todo/{}", todoId);
         todoService.deleteTodoById(todoId);
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping
+    @DeleteMapping("/todos")
     public ResponseEntity<Void> deleteAllTodos() {
         LOGGER.info("Delete request /v1/todos");
         todoService.deleteAllTodos();

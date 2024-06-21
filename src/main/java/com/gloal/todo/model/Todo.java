@@ -22,7 +22,7 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long taskId;
 
-    @NotNull(message ="Task cannot be null")
+    @NotNull(message = "Task cannot be null")
     @Size(min = 3, max = 250, message = "Task must have at between 3 and 250 characters")
     @NotBlank(message = "Task must be supplied")
     private String task;
